@@ -127,6 +127,8 @@ class Product_Object():
         self.conditional_write(True,
                                positive="The cart currently has %d items" % self.CART_QUANTITY,
                                negative="")
+        # return statment was missing
+        return cart_quantity
 
     def add_product(self, product_name):
         "Add the lowest priced product with the filter condition in name"
