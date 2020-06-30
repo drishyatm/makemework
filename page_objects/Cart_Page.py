@@ -84,8 +84,8 @@ class Cart_Page(Base_Page):
                                    positive="... the expected price matched to %d" % item[self.COL_PRICE],
                                    negative="... the expected price did not match. Expected: %d but Obtained: %d" % (expected_price, item[self.COL_PRICE]))
 
-            item_match_flag &= found_flag and price_match_flag
-
+            item_match_flag = found_flag and price_match_flag
+        print("verifycart flag", item_match_flag, found_flag, price_match_flag)
         return item_match_flag
 
     def verify_missing_item(self, expected_cart, actual_cart):
