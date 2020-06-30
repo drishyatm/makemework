@@ -15,7 +15,7 @@ class Cart_Page(Base_Page):
     CART_ROW_COLUMN = locators.CART_ROW_COLUMN
     CART_TOTAL = locators.CART_TOTAL
     COL_NAME = 0
-    COL_PRICE = 1
+    COL_PRICE = 0
 
     def start(self):
         "Override the start method of base"
