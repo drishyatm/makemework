@@ -15,7 +15,7 @@ class Cart_Page(Base_Page):
     CART_ROW_COLUMN = locators.CART_ROW_COLUMN
     CART_TOTAL = locators.CART_TOTAL
     COL_NAME = 0
-    COL_PRICE = 0
+    COL_PRICE = 1
 
     def start(self):
         "Override the start method of base"
@@ -43,10 +43,10 @@ class Cart_Page(Base_Page):
             item = []
             for col in column_elements:
                 text = self.get_dom_text(col)
-            item.append(text.decode('ascii'))
+                # inside the loop will give both name and price
+                item.append(text.decode('ascii'))
             item = self.process_item(item)
             cart_items.append(item)
-
         return cart_items
 
     def verify_cart_size(self, expected_cart, actual_cart):
