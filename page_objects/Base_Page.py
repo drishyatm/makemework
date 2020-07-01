@@ -712,6 +712,17 @@ class Base_Page(Borg, unittest.TestCase):
                 self.write(str(i)+"- " + msg)
         self.write('************************')
 
+    def switch_frame(self, locator):
+        try:
+            frame_location = self.get_element(locator)
+            self.driver.switch_to_frame(frame_location)
+            result_flag = True
+        except Exception as e:
+            print("xpath not correct")
+            result_flag = False
+
+        return result_flag
+
     def start(self):
         "Overwrite this method in your Page module if you want to visit a specific URL"
         pass

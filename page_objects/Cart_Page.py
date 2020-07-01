@@ -6,6 +6,7 @@ URL: /cart
 from .Base_Page import Base_Page
 from utils.Wrapit import Wrapit
 import conf.locators_conf as locators
+import conf.payment_details as payment
 
 
 class Cart_Page(Base_Page):
@@ -16,6 +17,26 @@ class Cart_Page(Base_Page):
     CART_TOTAL = locators.CART_TOTAL
     COL_NAME = 0
     COL_PRICE = 1
+
+    # Payment Frame Locators
+    PAYMENT_BUTTON = locators.PAYMENT_BUTTON
+    PAYMENT_FRAME = locators.PAYMENT_FRAME
+    EMAIL = locators.EMAIL
+    CARD_NUMBER = locators.CARD_NUMBER
+    DATE_MONTH = locators.DATE_MONTH
+    CVC = locators.CVC
+    ZIPCODE = locators.ZIPCODE
+    CHECK_BOX = locators.CHECK_BOX
+    PHONE_NUMBER = locators.PHONE_NUMBER
+    PAY_AMOUNT = locators.PAY_AMOUNT
+
+    # Get the test details from the conf file
+    email = payment.email
+    card_number = payment.card_number
+    date_month = payment.date_month
+    cvc = payment.cvc
+    postal_code = payment.postal_code
+    phone_number = payment.phone_number
 
     def start(self):
         "Override the start method of base"
@@ -148,4 +169,21 @@ class Cart_Page(Base_Page):
             result_flag &= self.verify_missing_item(expected_cart, actual_cart)
         result_flag &= self.verify_cart_total(expected_cart)
 
+        return result_flag
+
+    def enter_payment_details(self):
+        result_flag = self.set_text(self.EMAIL, self.email)
+        result_flag &= self.set_text(self.CARD_NUMBER, self.card_number)
+        result_flag &= self.set_text(self.DATE_MONTH, self.date_month)
+        result_flag &= self.set_text(self.CVC, self.cvc)
+        result_flag &= self.set_text(self.ZIPCODE, self.postal_code)
+        result_flag &= self.click_element(self.CHECK_BOX)
+        result_flag &= self.set_text(self.PHONE_NUMBER, self.phone_number)
+        result_flag &= self.click_element(self.PAY_AMOUNT)
+
+        return result_flag
+
+    def go_to_payment(self):
+        result_flag = self.click_element(self.PAYMENT_BUTTON)
+        result_flag &= self.switch_frame(self.PAYMENT_FRAME)
         return result_flag
