@@ -151,7 +151,7 @@ class Cart_Page(Base_Page):
         "Verify the total in the cart"
         expected_total = 0
         for product in expected_cart:
-            expected_total = product.price
+            expected_total += product.price  # added + to calculate the price correctly
         actual_total = self.get_total_price()
         result_flag = actual_total == expected_total
         self.conditional_write(result_flag,
